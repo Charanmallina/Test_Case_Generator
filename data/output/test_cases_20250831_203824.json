@@ -1,0 +1,306 @@
+{
+  "metadata": {
+    "total_test_cases": 8,
+    "generated_at": "2025-08-31T20:38:40.393736",
+    "success_rate": "8/8 (100.0%)",
+    "model_used": "llama-3.3-70b-versatile",
+    "source_file": "data/output/temp_filtered_20250831_203824.json"
+  },
+  "test_cases": [
+    {
+      "test_case_id": "TC_WEB_001",
+      "domain": "Customer Portal",
+      "service": "Plan Management",
+      "test_type": "Functional",
+      "priority": "High",
+      "severity": "Medium",
+      "issue_description": "Customer is unable to change their plan immediately through the online portal and is forced to wait until the next billing cycle",
+      "test_scenario": "Test that a customer can upgrade their plan immediately through the online portal without being restricted by the next billing cycle",
+      "preconditions": [
+        "Customer has an active account",
+        "Customer has a plan that can be upgraded",
+        "Customer has used most of their data for the current cycle"
+      ],
+      "test_steps": [
+        "Step 1: Log in to the customer portal",
+        "Step 2: Navigate to the plan management section",
+        "Step 3: Attempt to upgrade the plan to a higher tier",
+        "Step 4: Verify that the option to upgrade immediately is available",
+        "Step 5: Select the option to upgrade immediately and verify that the prorated charge is calculated correctly"
+      ],
+      "expected_result": "The customer is able to upgrade their plan immediately through the online portal without being restricted by the next billing cycle, and the prorated charge is calculated correctly",
+      "actual_issue": "The online portal does not allow customers to upgrade their plan immediately and forces them to wait until the next billing cycle, leading to customer frustration and unnecessary support calls",
+      "environmental_dependencies": [
+        "Browser type",
+        "Device",
+        "Network"
+      ],
+      "edge_cases": [
+        "Test with different plan types",
+        "Test with different data usage scenarios",
+        "Test with multiple upgrades in a single billing cycle"
+      ],
+      "automation_feasibility": "High",
+      "customer_impact": "Customer frustration, unnecessary support calls, and potential loss of business due to inability to meet customer needs in a timely manner",
+      "source_call_id": "TW_WEB_002",
+      "source_channel": "Web Portal",
+      "generated_at": "2025-08-31T20:38:27.630275"
+    },
+    {
+      "test_case_id": "TC_WEB_001",
+      "domain": "Web Portal",
+      "service": "Device Activation",
+      "test_type": "Functional",
+      "priority": "Critical",
+      "severity": "High",
+      "issue_description": "Port request gets stuck due to missing middle initial in customer's name",
+      "test_scenario": "Test that the web portal's device activation form requires and validates the customer's full name, including middle initial, to match the name on their existing account",
+      "preconditions": [
+        "Customer has an existing account with a carrier, such as Verizon",
+        "Customer has a new phone to activate on the Total Wireless web portal"
+      ],
+      "test_steps": [
+        "Step 1: Create a test account on the web portal with a name that includes a middle initial",
+        "Step 2: Attempt to activate a new phone on the test account, entering only the first and last name in the activation form",
+        "Step 3: Verify that the form validation checks for a middle initial and prevents submission if it is missing",
+        "Step 4: Enter the complete name, including middle initial, and verify that the activation process proceeds without issues"
+      ],
+      "expected_result": "The web portal's device activation form requires and validates the customer's full name, including middle initial, and the activation process completes successfully",
+      "actual_issue": "The current form design does not account for middle initials, causing port requests to get stuck and resulting in service delays and customer dissatisfaction",
+      "environmental_dependencies": [
+        "Browser type: Chrome, Firefox, Edge",
+        "Device: Desktop, Laptop, Mobile",
+        "Network: Stable internet connection"
+      ],
+      "edge_cases": [
+        "Test with different types of names, such as names with suffixes (e.g. Jr., Sr.) or non-English characters",
+        "Test with different carrier accounts, such as AT&T or T-Mobile"
+      ],
+      "automation_feasibility": "High",
+      "customer_impact": "Service delays, customer dissatisfaction, and potential loss of business due to frustrating user experience",
+      "source_call_id": "TW_WEB_003",
+      "source_channel": "Web Portal",
+      "generated_at": "2025-08-31T20:38:29.653697"
+    },
+    {
+      "test_case_id": "TC_WEB_001",
+      "domain": "Web Portal",
+      "service": "Billing and Roaming",
+      "test_type": "Functional",
+      "priority": "Critical",
+      "severity": "High",
+      "issue_description": "Customer is charged for international roaming without notification when phone connects to a stronger foreign tower near the border",
+      "test_scenario": "Test that the system notifies customers when their phone connects to a foreign tower for roaming, especially in border areas",
+      "preconditions": [
+        "Customer has an active international roaming plan",
+        "Customer is near the US-Mexico border",
+        "Foreign tower signal is stronger than US tower signal"
+      ],
+      "test_steps": [
+        "Step 1: Enable international roaming on the customer's account",
+        "Step 2: Simulate the customer's phone connecting to a foreign tower near the border",
+        "Step 3: Verify that the customer receives a roaming notification or warning",
+        "Step 4: Check the customer's usage details to ensure accurate roaming charges are applied"
+      ],
+      "expected_result": "The customer receives a notification or warning when their phone connects to a foreign tower for roaming, and accurate roaming charges are applied to their account",
+      "actual_issue": "Customers are not receiving notifications when their phone connects to a foreign tower, resulting in unexpected roaming charges",
+      "environmental_dependencies": [
+        "Mobile device with international roaming capabilities",
+        "Strong foreign tower signal near the US-Mexico border"
+      ],
+      "edge_cases": [
+        "Customer is in an area with weak US tower signal",
+        "Customer has a phone with automatic network selection enabled",
+        "Customer is using a phone with a specific operating system or firmware version"
+      ],
+      "automation_feasibility": "Medium",
+      "customer_impact": "Unexpected roaming charges and lack of transparency in billing",
+      "source_call_id": "TW_WEB_004",
+      "source_channel": "Web Portal",
+      "generated_at": "2025-08-31T20:38:31.530224"
+    },
+    {
+      "test_case_id": "TC_WEB_001",
+      "domain": "Customer Portal",
+      "service": "Device Purchase",
+      "test_type": "Functional",
+      "priority": "High",
+      "severity": "High",
+      "issue_description": "Pricing discrepancy between product page and checkout page for device purchase",
+      "test_scenario": "Verify that pricing information is consistent and clearly indicates any conditions (e.g. new line activation) on the product page and checkout page",
+      "preconditions": [
+        "User is logged in to their account",
+        "User has an existing line to upgrade",
+        "User selects a device with conditional pricing (e.g. new line activation)"
+      ],
+      "test_steps": [
+        "Step 1: Navigate to the product page of a device with conditional pricing (e.g. Samsung Galaxy A54)",
+        "Step 2: Verify the price displayed on the product page",
+        "Step 3: Proceed to checkout with the selected device",
+        "Step 4: Verify the price displayed on the checkout page",
+        "Step 5: Check for any clear indications of conditional pricing (e.g. 'Price includes new line activation discount')"
+      ],
+      "expected_result": "The price displayed on the product page and checkout page is consistent, and any conditions (e.g. new line activation) are clearly indicated on the product page",
+      "actual_issue": "Pricing discrepancy between product page and checkout page due to unclear conditional pricing information",
+      "environmental_dependencies": [
+        "Browser type (e.g. Chrome, Firefox)",
+        "Device type (e.g. desktop, mobile)"
+      ],
+      "edge_cases": [
+        "Test with different devices and pricing conditions (e.g. new line activation, upgrade, bring-your-own-device)",
+        "Test with different user account scenarios (e.g. new customer, existing customer with multiple lines)"
+      ],
+      "automation_feasibility": "High",
+      "customer_impact": "Customer time wasted, trust, and potential loss of sales due to pricing confusion",
+      "source_call_id": "TW_WEB_005",
+      "source_channel": "Web Portal",
+      "generated_at": "2025-08-31T20:38:33.330972"
+    },
+    {
+      "test_case_id": "TC_WEB_001",
+      "domain": "Customer Portal",
+      "service": "Plan Management",
+      "test_type": "Functional",
+      "priority": "High",
+      "severity": "Medium",
+      "issue_description": "Plan change buttons are non-responsive for customers with multiple add-ons",
+      "test_scenario": "Test plan change functionality for customers with multiple add-ons",
+      "preconditions": [
+        "Customer has an account with multiple add-ons (e.g. international calling and mobile hotspot)",
+        "Customer is using a supported browser (e.g. Chrome)"
+      ],
+      "test_steps": [
+        "Step 1: Log in to the customer portal with a test account that has multiple add-ons",
+        "Step 2: Navigate to the plan change page",
+        "Step 3: Click on the plan options buttons",
+        "Step 4: Verify that the plan change feature responds as expected"
+      ],
+      "expected_result": "The plan change buttons should respond and allow the customer to change their plan",
+      "actual_issue": "The plan change buttons are non-responsive and do not allow the customer to change their plan",
+      "environmental_dependencies": [
+        "Browser type (e.g. Chrome, Firefox)",
+        "Device type (e.g. laptop, desktop)"
+      ],
+      "edge_cases": [
+        "Test with different combinations of add-ons",
+        "Test with different browser versions"
+      ],
+      "automation_feasibility": "High",
+      "customer_impact": "Customers are unable to change their plans online, leading to frustration and potential churn",
+      "source_call_id": "TW_WEB_006",
+      "source_channel": "Web Portal",
+      "generated_at": "2025-08-31T20:38:34.944504"
+    },
+    {
+      "test_case_id": "TC_WEB_001",
+      "domain": "Customer Portal",
+      "service": "Promotional Offers",
+      "test_type": "Functional",
+      "priority": "High",
+      "severity": "High",
+      "issue_description": "Promotional code not valid for existing customers, despite being sent to their email address",
+      "test_scenario": "Test that promotional codes sent to existing customers via email are clearly marked as invalid for their account type",
+      "preconditions": [
+        "Existing customer account with email address",
+        "Promotional code sent to existing customer email address"
+      ],
+      "test_steps": [
+        "Step 1: Log in to the customer portal with an existing customer account",
+        "Step 2: Attempt to apply a promotional code sent to the existing customer email address",
+        "Step 3: Verify that the system checks the customer's account type before applying the code",
+        "Step 4: Verify that the system displays a clear error message if the code is not valid for the customer's account type",
+        "Step 5: Verify that the promotional code email sent to the customer clearly indicates any restrictions on its use (e.g. new customers only)"
+      ],
+      "expected_result": "The system should clearly indicate that the promotional code is not valid for the existing customer's account type, and the email should clearly state any restrictions on its use",
+      "actual_issue": "The system allows existing customers to attempt to apply promotional codes that are only valid for new customers, without clear indication of the restriction",
+      "environmental_dependencies": [
+        "Browser type",
+        "Device"
+      ],
+      "edge_cases": [
+        "Test with different types of promotional codes (e.g. percentage off, dollar amount off)",
+        "Test with different customer account types (e.g. individual, business)"
+      ],
+      "automation_feasibility": "High",
+      "customer_impact": "Customer frustration and wasted time due to unclear promotional code restrictions",
+      "source_call_id": "TW_until",
+      "source_channel": "Web Portal",
+      "generated_at": "2025-08-31T20:38:37.029062"
+    },
+    {
+      "test_case_id": "TC_WEBPORTAL_001",
+      "domain": "Mobile App",
+      "service": "Device Upgrade",
+      "test_type": "Functional",
+      "priority": "High",
+      "severity": "High",
+      "issue_description": "Mobile app crashes when selecting a new device for upgrade on Android devices with more than 100 apps installed",
+      "test_scenario": "Test device upgrade feature on Android devices with varying number of installed apps",
+      "preconditions": [
+        "Android device with Total Wireless mobile app installed",
+        "More than 100 apps installed on the device",
+        "Device upgrade option available in the app"
+      ],
+      "test_steps": [
+        "Step 1: Launch the Total Wireless mobile app on an Android device",
+        "Step 2: Navigate to the device upgrade section",
+        "Step 3: Select a new device for upgrade",
+        "Step 4: Verify if the app crashes or throws an error",
+        "Step 5: Repeat steps 2-4 with different numbers of installed apps (e.g., 50, 100, 150) to identify the threshold for the crash"
+      ],
+      "expected_result": "The mobile app should allow device upgrade selection without crashing, regardless of the number of installed apps",
+      "actual_issue": "The mobile app crashes when selecting a new device for upgrade on Android devices with more than 100 apps installed, due to memory management issues",
+      "environmental_dependencies": [
+        "Android device (e.g., Google Pixel 6)",
+        "Total Wireless mobile app",
+        "Various numbers of installed apps"
+      ],
+      "edge_cases": [
+        "Test with different Android versions",
+        "Test with different device manufacturers",
+        "Test with different types of apps installed (e.g., games, social media, productivity)"
+      ],
+      "automation_feasibility": "Medium",
+      "customer_impact": "Core functionality (device upgrade) is unavailable on mobile, forcing customers to use alternative channels, resulting in a poor customer experience",
+      "source_call_id": "TW_phone",
+      "source_channel": "Web Portal",
+      "generated_at": "2025-08-31T20:38:38.781364"
+    },
+    {
+      "test_case_id": "TC_WEB_001",
+      "domain": "Mobile App",
+      "service": "Auto-Pay Management",
+      "test_type": "Functional",
+      "priority": "High",
+      "severity": "Medium",
+      "issue_description": "Customer unable to disable auto-pay in mobile app when enrolled through website",
+      "test_scenario": "Test that a customer can disable auto-pay in the mobile app regardless of where they initially enrolled",
+      "preconditions": [
+        "Customer has auto-pay enabled through the website",
+        "Customer has mobile app installed and logged in"
+      ],
+      "test_steps": [
+        "Step 1: Enable auto-pay for a test account through the website",
+        "Step 2: Log in to the mobile app with the test account",
+        "Step 3: Navigate to 'Account Settings' then 'Payment Settings'",
+        "Step 4: Verify that the option to disable auto-pay is available",
+        "Step 5: Disable auto-pay and verify that it is successfully updated"
+      ],
+      "expected_result": "The customer can disable auto-pay in the mobile app and the change is reflected in their account settings",
+      "actual_issue": "The mobile app lacks the feature to disable auto-pay for customers who enrolled through the website",
+      "environmental_dependencies": [
+        "Mobile device with latest app version",
+        "Website with auto-pay enrollment capability"
+      ],
+      "edge_cases": [
+        "Test with different payment methods",
+        "Test with multiple accounts and auto-pay enrollments"
+      ],
+      "automation_feasibility": "Medium",
+      "customer_impact": "Customer experience is negatively impacted as they cannot manage their account features through their preferred channel",
+      "source_call_id": "TW_WEB_010",
+      "source_channel": "Web Portal",
+      "generated_at": "2025-08-31T20:38:40.391803"
+    }
+  ]
+}

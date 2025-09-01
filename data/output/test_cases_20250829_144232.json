@@ -1,0 +1,79 @@
+{
+  "metadata": {
+    "total_test_cases": 2,
+    "generated_at": "2025-08-29T14:42:36.923288",
+    "success_rate": "2/2 (100.0%)",
+    "model_used": "llama3-70b-8192",
+    "source_file": "data/output/temp_filtered_20250829_144232.json"
+  },
+  "test_cases": [
+    {
+      "test_case_id": "TC_SMS_001",
+      "domain": "Customer Portal",
+      "service": "Plan Management",
+      "test_type": "Functional",
+      "priority": "High",
+      "severity": "High",
+      "issue_description": "Unlimited plan customers receive false data limit warnings due to SMS alert system not updating after plan change",
+      "test_scenario": "Test plan change from limited to unlimited and verify SMS alert system updates correctly",
+      "preconditions": [
+        "Customer has a limited data plan with SMS alerts enabled",
+        "Customer changes to an unlimited data plan"
+      ],
+      "test_steps": [
+        "Step 1: Change customer's plan from limited to unlimited",
+        "Step 2: Verify SMS alert system is updated to reflect unlimited plan",
+        "Step 3: Check if customer receives false data limit warnings"
+      ],
+      "expected_result": "SMS alert system updates correctly to reflect unlimited plan and customer does not receive false data limit warnings",
+      "actual_issue": "SMS alert system does not update automatically when customer changes to unlimited plan, causing false data limit warnings",
+      "environmental_dependencies": [
+        "Customer Portal",
+        "SMS alert system"
+      ],
+      "edge_cases": [
+        "Test with different types of limited plans",
+        "Test with multiple plan changes in a short period"
+      ],
+      "automation_feasibility": "High",
+      "customer_impact": "Unlimited customers receive unnecessary stress and may restrict their data usage due to false warnings",
+      "source_call_id": "TW_worrying",
+      "source_channel": "SMS/Bot/IVR",
+      "generated_at": "2025-08-29T14:42:35.227564"
+    },
+    {
+      "test_case_id": "TC_SMS_001",
+      "domain": "SMS",
+      "service": "Service Commands",
+      "test_type": "Functional",
+      "priority": "High",
+      "severity": "Medium",
+      "issue_description": "SMS commands listed in HELP menu are not functional",
+      "test_scenario": "Verify that all SMS commands listed in HELP menu are functional and return correct responses",
+      "preconditions": [
+        "Setup SMS service with a test account",
+        "Send HELP command to retrieve list of available commands"
+      ],
+      "test_steps": [
+        "Step 1: Send each command listed in HELP menu response",
+        "Step 2: Verify response for each command",
+        "Step 3: Check for 'invalid command' errors"
+      ],
+      "expected_result": "All SMS commands listed in HELP menu return correct responses without 'invalid command' errors",
+      "actual_issue": "Some SMS commands listed in HELP menu return 'invalid command' errors",
+      "environmental_dependencies": [
+        "SMS service",
+        "Test account"
+      ],
+      "edge_cases": [
+        "Test with different account types",
+        "Test with different device types"
+      ],
+      "automation_feasibility": "High",
+      "customer_impact": "Customer expectations not met, time wasted due to misleading HELP menu",
+      "source_call_id": "TW_command",
+      "source_channel": "SMS/Bot/IVR",
+      "generated_at": "2025-08-29T14:42:36.921349"
+    }
+  ]
+}

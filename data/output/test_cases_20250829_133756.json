@@ -1,0 +1,82 @@
+{
+  "metadata": {
+    "total_test_cases": 2,
+    "generated_at": "2025-08-29T13:38:01.570197",
+    "success_rate": "2/2 (100.0%)",
+    "model_used": "llama3-70b-8192",
+    "source_file": "data/output/temp_filtered_20250829_133756.json"
+  },
+  "test_cases": [
+    {
+      "test_case_id": "TC_WEB_PORTAL_001",
+      "domain": "Web Portal",
+      "service": "Device Activation",
+      "test_type": "Functional",
+      "priority": "High",
+      "severity": "High",
+      "issue_description": "Port request stuck due to missing middle initial in customer's name",
+      "test_scenario": "Test port request with customer name having middle initial",
+      "preconditions": [
+        "Customer has a Verizon account with middle initial in their name",
+        "Customer has purchased a new phone from Total Wireless website"
+      ],
+      "test_steps": [
+        "Step 1: Enter customer's Verizon account info with only first and last name on the activation page",
+        "Step 2: Submit the port request",
+        "Step 3: Verify the port request status"
+      ],
+      "expected_result": "Port request should be successful and not stuck",
+      "actual_issue": "Port request gets stuck due to missing middle initial in customer's name",
+      "environmental_dependencies": [
+        "Web Portal",
+        "Device Activation Page"
+      ],
+      "edge_cases": [
+        "Test with different types of middle initials (e.g. Jr., Sr., III)",
+        "Test with different character lengths for middle initial"
+      ],
+      "automation_feasibility": "High",
+      "customer_impact": "Service delays and customer dissatisfaction",
+      "source_call_id": "TW_WEB_003",
+      "source_channel": "Web Portal",
+      "generated_at": "2025-08-29T13:37:59.715075"
+    },
+    {
+      "test_case_id": "TC_WEB_001",
+      "domain": "Web Portal",
+      "service": "Billing",
+      "test_type": "Functional",
+      "priority": "High",
+      "severity": "High",
+      "issue_description": "Customer is charged for international roaming without notification when near the border",
+      "test_scenario": "Test automatic border roaming without customer notification",
+      "preconditions": [
+        "User has a phone with international roaming capabilities",
+        "User is near the Mexican border in the US"
+      ],
+      "test_steps": [
+        "Step 1: User travels to an area near the Mexican border in the US",
+        "Step 2: User's phone automatically connects to a Mexican tower",
+        "Step 3: Verify that the user's phone does not display any roaming notifications or warnings",
+        "Step 4: Verify that the user is charged for international roaming"
+      ],
+      "expected_result": "The user's phone should display a roaming notification or warning when automatically connecting to a foreign tower, and the user should not be charged for international roaming without their knowledge",
+      "actual_issue": "Customer is charged for international roaming without notification when near the border",
+      "environmental_dependencies": [
+        "Phone model",
+        "Network provider",
+        "Location near the Mexican border"
+      ],
+      "edge_cases": [
+        "Test with different phone models",
+        "Test with different network providers",
+        "Test in different border locations"
+      ],
+      "automation_feasibility": "Medium",
+      "customer_impact": "Unexpected charges and poor customer experience",
+      "source_call_id": "TW_WEB_004",
+      "source_channel": "Web Portal",
+      "generated_at": "2025-08-29T13:38:01.568267"
+    }
+  ]
+}

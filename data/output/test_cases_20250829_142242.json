@@ -1,0 +1,48 @@
+{
+  "metadata": {
+    "total_test_cases": 1,
+    "generated_at": "2025-08-29T14:22:45.926592",
+    "success_rate": "1/1 (100.0%)",
+    "model_used": "llama3-70b-8192",
+    "source_file": "data/output/temp_filtered_20250829_142242.json"
+  },
+  "test_cases": [
+    {
+      "test_case_id": "TC_TASORA_001",
+      "domain": "TASORA",
+      "service": "Customer Support",
+      "test_type": "Functional",
+      "priority": "Medium",
+      "severity": "Medium",
+      "issue_description": "Customer unable to access support transcript dataset",
+      "test_scenario": "Verify customer support transcript dataset accessibility",
+      "preconditions": [
+        "TASORA channel is available",
+        "Customer has access to support transcript dataset"
+      ],
+      "test_steps": [
+        "Step 1: Log in to TASORA channel",
+        "Step 2: Attempt to access support transcript dataset",
+        "Step 3: Verify dataset is accessible and records are available"
+      ],
+      "expected_result": "Customer is able to access support transcript dataset with all records",
+      "actual_issue": "Customer unable to access support transcript dataset",
+      "environmental_dependencies": [
+        "TASORA channel",
+        "Web Portal",
+        "Mobile App",
+        "Target",
+        "SMS/Bot/IVR"
+      ],
+      "edge_cases": [
+        "Test with different channels",
+        "Test with different customer roles"
+      ],
+      "automation_feasibility": "Medium",
+      "customer_impact": "Customer unable to access necessary support resources",
+      "source_call_id": "TW_TASORA_001",
+      "source_channel": "TASORA",
+      "generated_at": "2025-08-29T14:22:45.923026"
+    }
+  ]
+}

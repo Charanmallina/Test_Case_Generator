@@ -1,0 +1,554 @@
+{
+  "metadata": {
+    "total_test_cases": 15,
+    "generated_at": "2025-08-31T19:57:23.032911",
+    "success_rate": "15/15 (100.0%)",
+    "model_used": "llama-3.3-70b-versatile",
+    "source_file": "data/processed/masked_transcripts.json"
+  },
+  "test_cases": [
+    {
+      "test_case_id": "TC_TASORA_001",
+      "domain": "TASORA Channel",
+      "service": "Account Information/Conversation History",
+      "test_type": "Functional",
+      "priority": "Medium",
+      "severity": "Medium",
+      "issue_description": "Inability to properly mask or redact sensitive customer account information in conversation transcripts",
+      "test_scenario": "Test that account numbers are properly masked or redacted in customer conversation transcripts, especially when shared across different channels or used for testing purposes",
+      "preconditions": [
+        "Customer account with active conversation history",
+        "Access to TASORA channel conversation transcripts"
+      ],
+      "test_steps": [
+        "Step 1: Initiate a conversation with a customer through the TASORA channel",
+        "Step 2: Include sensitive account information in the conversation",
+        "Step 3: Verify that the account information is properly masked or redacted in the conversation transcript"
+      ],
+      "expected_result": "Account numbers and other sensitive information are completely masked or redacted from the conversation transcript",
+      "actual_issue": "Sensitive customer account information is visible in plain text in conversation transcripts",
+      "environmental_dependencies": [
+        "TASORA channel infrastructure",
+        "Data masking/redaction software"
+      ],
+      "edge_cases": [
+        "Conversations with multiple sensitive information exchanges",
+        "Conversations where account information is shared across different channels"
+      ],
+      "automation_feasibility": "Medium",
+      "customer_impact": "Potential data breach or unauthorized access to sensitive customer information",
+      "source_call_id": "TW_TASORA_001",
+      "source_channel": "TASORA",
+      "generated_at": "2025-08-31T19:57:02.060511"
+    },
+    {
+      "test_case_id": "TC_WEB_001",
+      "domain": "Customer Portal",
+      "service": "Plan Management",
+      "test_type": "Functional",
+      "priority": "High",
+      "severity": "Medium",
+      "issue_description": "Customer is unable to upgrade their plan online due to restrictions on mid-cycle changes",
+      "test_scenario": "Test plan upgrade functionality when customer has used most of their data and has time left in their billing cycle",
+      "preconditions": [
+        "Customer has an active account",
+        "Customer is on a plan with limited data",
+        "Customer has used most of their data allocation"
+      ],
+      "test_steps": [
+        "Step 1: Login to the customer portal",
+        "Step 2: Navigate to the plan management section",
+        "Step 3: Attempt to upgrade to a higher plan with more data",
+        "Step 4: Verify if the system allows or restricts the plan change",
+        "Step 5: Check for any error messages or prompts to wait until the next billing cycle"
+      ],
+      "expected_result": "The system should allow the customer to upgrade their plan with a prorated charge or provide clear instructions on alternative options",
+      "actual_issue": "The system restricts plan changes mid-cycle and does not provide a clear solution for customers who need more data immediately",
+      "environmental_dependencies": [
+        "Browser type",
+        "Device",
+        "Network"
+      ],
+      "edge_cases": [
+        "Test with different plan combinations",
+        "Test with varying data usage levels",
+        "Test with different billing cycle timelines"
+      ],
+      "automation_feasibility": "Medium",
+      "customer_impact": "Customers may experience frustration and inconvenience due to lack of flexibility in plan changes, leading to increased support calls",
+      "source_call_id": "TW_WEB_002",
+      "source_channel": "Web Portal",
+      "generated_at": "2025-08-31T19:57:03.594882"
+    },
+    {
+      "test_case_id": "TC_WEB_001",
+      "domain": "Web Portal",
+      "service": "Device Activation",
+      "test_type": "Functional",
+      "priority": "High",
+      "severity": "High",
+      "issue_description": "Device activation delayed due to incomplete name field in port request form",
+      "test_scenario": "Test that the port request form includes all necessary fields, including middle initial, to prevent activation delays",
+      "preconditions": [
+        "User has a Verizon account with a middle initial in their name",
+        "User has purchased a new device from the web portal"
+      ],
+      "test_steps": [
+        "Step 1: Log in to the web portal and initiate a port request",
+        "Step 2: Enter Verizon account information, including name with middle initial",
+        "Step 3: Verify that the form includes a field for middle initial and that it is required",
+        "Step 4: Submit the port request and verify that the activation is processed successfully"
+      ],
+      "expected_result": "The port request form includes all necessary fields, including middle initial, and the device activation is processed successfully without delays",
+      "actual_issue": "The port request form does not include a field for middle initial, causing activation delays for customers with middle initials in their name",
+      "environmental_dependencies": [
+        "Web browser type",
+        "Device type"
+      ],
+      "edge_cases": [
+        "Test with different types of names, including those with suffixes (e.g. Jr, Sr) or multiple middle names",
+        "Test with different Verizon account types (e.g. prepaid, postpaid)"
+      ],
+      "automation_feasibility": "Medium",
+      "customer_impact": "Service delays and customer dissatisfaction due to incomplete or poorly designed port request form",
+      "source_call_id": "TW_WEB_003",
+      "source_channel": "Web Portal",
+      "generated_at": "2025-08-31T19:57:05.240330"
+    },
+    {
+      "test_case_id": "TC_WEB_001",
+      "domain": "Web Portal",
+      "service": "Billing and Roaming",
+      "test_type": "Functional",
+      "priority": "High",
+      "severity": "High",
+      "issue_description": "Incorrect international roaming charges when near the border",
+      "test_scenario": "Test that the system correctly identifies and handles roaming charges when a user is near the border but does not cross into another country",
+      "preconditions": [
+        "User has an active account with international roaming enabled",
+        "User is near the border but does not cross into another country"
+      ],
+      "test_steps": [
+        "Step 1: Set up a test user account with international roaming enabled",
+        "Step 2: Simulate the user being near the border (e.g. San Diego near the Mexican border) but not crossing into another country",
+        "Step 3: Verify that the user's phone connects to a domestic tower instead of a foreign tower",
+        "Step 4: Check the user's account for any international roaming charges",
+        "Step 5: Verify that the system correctly identifies the user's location and does not charge for international roaming"
+      ],
+      "expected_result": "The system correctly identifies the user's location and does not charge for international roaming when the user is near the border but does not cross into another country",
+      "actual_issue": "The system is incorrectly charging users for international roaming when they are near the border but do not cross into another country",
+      "environmental_dependencies": [
+        "Cell tower simulation",
+        "Geolocation services",
+        "Web portal billing system"
+      ],
+      "edge_cases": [
+        "User is near the border but crosses into another country",
+        "User has a weak signal and connects to a foreign tower",
+        "User has international roaming disabled"
+      ],
+      "automation_feasibility": "Medium",
+      "customer_impact": "Incorrect charges and potential financial loss for customers who are incorrectly charged for international roaming",
+      "source_call_id": "TW_WEB_004",
+      "source_channel": "Web Portal",
+      "generated_at": "2025-08-31T19:57:06.819146"
+    },
+    {
+      "test_case_id": "TC_WEB_001",
+      "domain": "Customer Portal",
+      "service": "Device Purchase",
+      "test_type": "Functional",
+      "priority": "High",
+      "severity": "High",
+      "issue_description": "Pricing discrepancy between product page and checkout page for device purchase",
+      "test_scenario": "Test that the pricing displayed on the product page matches the pricing at checkout, considering different plan options (new line, existing line, etc.)",
+      "preconditions": [
+        "User is logged in to the web portal",
+        "User has selected a device to purchase (e.g. Samsung Galaxy A54)"
+      ],
+      "test_steps": [
+        "Step 1: Navigate to the product page of a device (e.g. Samsung Galaxy A54)",
+        "Step 2: Note the price displayed on the product page",
+        "Step 3: Proceed to checkout with different plan options (new line, existing line, etc.)",
+        "Step 4: Verify that the price at checkout matches the price displayed on the product page for each plan option"
+      ],
+      "expected_result": "The price displayed on the product page matches the price at checkout for all plan options",
+      "actual_issue": "Pricing discrepancy between product page and checkout page, causing customer confusion and trust issues",
+      "environmental_dependencies": [
+        "Browser type (e.g. Chrome, Firefox)",
+        "Device type (e.g. desktop, mobile)"
+      ],
+      "edge_cases": [
+        "Test with different devices and plans",
+        "Test with multiple lines and account types"
+      ],
+      "automation_feasibility": "High",
+      "customer_impact": "Customer experiences frustration, wasted time, and decreased trust due to unexpected price changes during checkout",
+      "source_call_id": "TW_WEB_005",
+      "source_channel": "Web Portal",
+      "generated_at": "2025-08-31T19:57:08.295122"
+    },
+    {
+      "test_case_id": "TC_WEB_001",
+      "domain": "Customer Portal",
+      "service": "Plan Management",
+      "test_type": "Functional",
+      "priority": "High",
+      "severity": "Medium",
+      "issue_description": "Plan change buttons are non-responsive for users with certain add-ons",
+      "test_scenario": "Test plan change functionality for users with international calling and mobile hotspot add-ons",
+      "preconditions": [
+        "User has an account with international calling and mobile hotspot add-ons",
+        "User is accessing the website via Chrome browser on a laptop"
+      ],
+      "test_steps": [
+        "Step 1: Login to the customer portal with a test account having international calling and mobile hotspot add-ons",
+        "Step 2: Navigate to the plan management section",
+        "Step 3: Click on the plan options button",
+        "Step 4: Verify that the plan change options are displayed and responsive"
+      ],
+      "expected_result": "The plan change options should be displayed and the buttons should be responsive, allowing the user to change their plan",
+      "actual_issue": "The plan change buttons are non-responsive and do not allow the user to change their plan",
+      "environmental_dependencies": [
+        "Chrome browser",
+        "Laptop device",
+        "Internet connection"
+      ],
+      "edge_cases": [
+        "Test with different browser types (e.g. Firefox, Safari)",
+        "Test with different device types (e.g. mobile, tablet)"
+      ],
+      "automation_feasibility": "High",
+      "customer_impact": "Customers are unable to change their plans, leading to frustration and potential churn",
+      "source_call_id": "TW_WEB_006",
+      "source_channel": "Web Portal",
+      "generated_at": "2025-08-31T19:57:09.625286"
+    },
+    {
+      "test_case_id": "TC_WEB_001",
+      "domain": "Web Portal",
+      "service": "Promotional Offers",
+      "test_type": "Functional",
+      "priority": "High",
+      "severity": "High",
+      "issue_description": "Promotional code not valid for existing customers despite being sent via email",
+      "test_scenario": "Test that promotional codes sent to existing customers are clearly marked as 'new customer only' or 'not valid for upgrades'",
+      "preconditions": [
+        "Existing customer account",
+        "Promotional code email sent to existing customer",
+        "Code is marked as valid until a specific date"
+      ],
+      "test_steps": [
+        "Step 1: Log in to the web portal as an existing customer",
+        "Step 2: Attempt to apply the promotional code to an upgrade order",
+        "Step 3: Verify that the system clearly indicates the code is not valid for existing customers or upgrades",
+        "Step 4: Check the email template for the promotional code to ensure it includes clear language about eligibility"
+      ],
+      "expected_result": "The system prevents the customer from applying the code to an upgrade order and clearly communicates the reason, or the email template clearly indicates the code is only valid for new customers",
+      "actual_issue": "Existing customers are able to attempt to apply promotional codes that are not valid for them, resulting in a 'code not valid' error without clear explanation",
+      "environmental_dependencies": [
+        "Web browser type",
+        "Device"
+      ],
+      "edge_cases": [
+        "Test with different types of promotional codes",
+        "Test with codes that have expired or are near expiration"
+      ],
+      "automation_feasibility": "Medium",
+      "customer_impact": "Frustration and wasted time for existing customers who attempt to use invalid promotional codes, potentially leading to churn",
+      "source_call_id": "TW_until",
+      "source_channel": "Web Portal",
+      "generated_at": "2025-08-31T19:57:11.263958"
+    },
+    {
+      "test_case_id": "TC_MOBILE_APP_001",
+      "domain": "Mobile App",
+      "service": "Data Usage Tracking",
+      "test_type": "Functional",
+      "priority": "High",
+      "severity": "Medium",
+      "issue_description": "Data usage discrepancy between mobile app and phone's built-in data tracker",
+      "test_scenario": "Verify that the data usage displayed in the mobile app matches the phone's built-in data tracker",
+      "preconditions": [
+        "User has a mobile app account",
+        "User has a phone with a built-in data tracker",
+        "User has used data during the test period"
+      ],
+      "test_steps": [
+        "Step 1: Launch the mobile app and navigate to the data usage section",
+        "Step 2: Note the data usage displayed in the mobile app",
+        "Step 3: Check the phone's built-in data tracker and note the data usage",
+        "Step 4: Compare the data usage displayed in the mobile app with the phone's built-in data tracker",
+        "Step 5: Verify that the data usage displayed in the mobile app matches the phone's built-in data tracker, allowing for a reasonable margin of error"
+      ],
+      "expected_result": "The data usage displayed in the mobile app matches the phone's built-in data tracker, ensuring accurate tracking and preventing unnecessary worries about hitting the data limit",
+      "actual_issue": "The mobile app displays incorrect data usage, causing discrepancies with the phone's built-in data tracker and potentially leading to customer concerns about data limits",
+      "environmental_dependencies": [
+        "Mobile device type",
+        "Network connectivity",
+        "Mobile app version"
+      ],
+      "edge_cases": [
+        "Test with different mobile devices and operating systems",
+        "Test with varying network conditions (e.g., 4G, 5G, Wi-Fi)",
+        "Test with different data usage patterns (e.g., heavy streaming, light browsing)"
+      ],
+      "automation_feasibility": "Medium",
+      "customer_impact": "Inaccurate data usage tracking can cause customer concern and uncertainty about their data limits, potentially leading to unnecessary support requests and a negative user experience",
+      "source_call_id": "TW_concern",
+      "source_channel": "Mobile App",
+      "generated_at": "2025-08-31T19:57:12.892143"
+    },
+    {
+      "test_case_id": "TC_WEB_001",
+      "domain": "Mobile App",
+      "service": "Device Upgrade",
+      "test_type": "Functional",
+      "priority": "High",
+      "severity": "High",
+      "issue_description": "Mobile app crashes when attempting to upgrade device on Android devices with more than 100 apps installed",
+      "test_scenario": "Test device upgrade functionality on Android devices with varying numbers of installed apps",
+      "preconditions": [
+        "Android device with more than 100 apps installed",
+        "Mobile app installed and logged in",
+        "Device upgrade option available"
+      ],
+      "test_steps": [
+        "Step 1: Launch mobile app on Android device",
+        "Step 2: Navigate to device upgrade section",
+        "Step 3: Select a new device to upgrade to",
+        "Step 4: Verify app response and complete upgrade process"
+      ],
+      "expected_result": "Device upgrade process completes successfully without app crash",
+      "actual_issue": "App crashes when selecting a new device to upgrade to on Android devices with more than 100 apps installed",
+      "environmental_dependencies": [
+        "Android device (e.g. Google Pixel 6)",
+        "Mobile app version with known bug",
+        "More than 100 apps installed on device"
+      ],
+      "edge_cases": [
+        "Test with different Android device models",
+        "Test with varying numbers of installed apps (e.g. 50, 100, 200)",
+        "Test with different device upgrade options (e.g. changing plan, adding features)"
+      ],
+      "automation_feasibility": "Medium",
+      "customer_impact": "Core functionality impacted, forcing customers to use alternative methods (e.g. website, customer support) to upgrade their devices",
+      "source_call_id": "TW_phone",
+      "source_channel": "Web Portal",
+      "generated_at": "2025-08-31T19:57:14.427470"
+    },
+    {
+      "test_case_id": "TC_WEB_001",
+      "domain": "Mobile App",
+      "service": "Auto-Pay Management",
+      "test_type": "Functional",
+      "priority": "High",
+      "severity": "Medium",
+      "issue_description": "Customer unable to disable auto-pay through mobile app when enrolled through website",
+      "test_scenario": "Test that a user can disable auto-pay through the mobile app regardless of the enrollment channel",
+      "preconditions": [
+        "User has an active account with auto-pay enabled through the website",
+        "User has the latest version of the mobile app installed"
+      ],
+      "test_steps": [
+        "Step 1: Log in to the mobile app with a test account that has auto-pay enabled through the website",
+        "Step 2: Navigate to the 'Account' section and then to 'Payment'",
+        "Step 3: Verify that the option to disable auto-pay is available",
+        "Step 4: Select the option to disable auto-pay and verify that it is successfully updated"
+      ],
+      "expected_result": "The user is able to disable auto-pay through the mobile app, and the change is reflected in the account settings",
+      "actual_issue": "The mobile app lacks the feature to disable auto-pay for accounts that enrolled through the website",
+      "environmental_dependencies": [
+        "Mobile device with the latest OS version",
+        "Latest version of the mobile app"
+      ],
+      "edge_cases": [
+        "Test with different types of payment methods",
+        "Test with accounts that have multiple users or profiles"
+      ],
+      "automation_feasibility": "High",
+      "customer_impact": "Customers are unable to manage their auto-pay settings through their preferred channel, leading to frustration and potential late payments",
+      "source_call_id": "TW_WEB_010",
+      "source_channel": "Web Portal",
+      "generated_at": "2025-08-31T19:57:15.861439"
+    },
+    {
+      "test_case_id": "TC_Target_001",
+      "domain": "Target Store",
+      "service": "SIM Card Activation",
+      "test_type": "Functional",
+      "priority": "Critical",
+      "severity": "High",
+      "issue_description": "New starter kit purchased at Target contains a previously activated SIM card",
+      "test_scenario": "Verify that new starter kits sold at Target contain unused SIM cards",
+      "preconditions": [
+        "New starter kit purchased at Target",
+        "SIM card status checked before activation"
+      ],
+      "test_steps": [
+        "Step 1: Purchase a new starter kit at Target",
+        "Step 2: Check the SIM card status before attempting to activate it",
+        "Step 3: Attempt to activate the SIM card",
+        "Step 4: Verify that the SIM card is not already active on another account"
+      ],
+      "expected_result": "The SIM card is successfully activated and not already in use on another account",
+      "actual_issue": "The SIM card is already active on another account, indicating it was previously used",
+      "environmental_dependencies": [
+        "Target store system",
+        "SIM card inventory management"
+      ],
+      "edge_cases": [
+        "Test with different types of starter kits",
+        "Test with SIM cards that were previously activated but not currently in use"
+      ],
+      "automation_feasibility": "Medium",
+      "customer_impact": "High, as customers may experience frustration and delay in activating their new service due to used SIM cards being sold as new",
+      "source_call_id": "TW_for",
+      "source_channel": "Target",
+      "generated_at": "2025-08-31T19:57:17.236995"
+    },
+    {
+      "test_case_id": "TC_Target_001",
+      "domain": "Target Store",
+      "service": "Promotional Pricing",
+      "test_type": "Functional",
+      "priority": "High",
+      "severity": "High",
+      "issue_description": "Price discrepancy between in-store display and actual retail pricing at Target",
+      "test_scenario": "Verify that in-store display prices match retail pricing at Target for the same product",
+      "preconditions": [
+        "Total Wireless service plan is available at Target",
+        "In-store display shows pricing for the plan"
+      ],
+      "test_steps": [
+        "Step 1: Check the in-store display price for a specific Total Wireless service plan",
+        "Step 2: Verify the retail pricing for the same plan at Target",
+        "Step 3: Compare the prices from Step 1 and Step 2 to ensure they match",
+        "Step 4: Repeat Steps 1-3 for different service plans and promotions"
+      ],
+      "expected_result": "The in-store display price matches the retail pricing at Target for the same service plan",
+      "actual_issue": "In-store display shows online pricing, which is different from Target's retail pricing",
+      "environmental_dependencies": [
+        "In-store display system",
+        "Target retail pricing system"
+      ],
+      "edge_cases": [
+        "Test with different service plans and promotions",
+        "Test with price changes or updates to ensure the in-store display reflects the correct pricing"
+      ],
+      "automation_feasibility": "Medium",
+      "customer_impact": "Customers may experience frustration and mistrust due to price discrepancies, potentially leading to lost sales and damaged reputation",
+      "source_call_id": "TW_TARGET_012",
+      "source_channel": "Target",
+      "generated_at": "2025-08-31T19:57:18.720950"
+    },
+    {
+      "test_case_id": "TC_Target_001",
+      "domain": "Target Store",
+      "service": "Device Return",
+      "test_type": "Functional",
+      "priority": "Medium",
+      "severity": "Medium",
+      "issue_description": "Customer is unable to return a defective device to Target within the return window, despite purchasing it from Target, due to conflicting return policies",
+      "test_scenario": "Test the return process for devices purchased at Target to ensure that customers can return defective devices within the return window",
+      "preconditions": [
+        "Customer has purchased a device from Target within the return window",
+        "Device is defective and customer wants to return it"
+      ],
+      "test_steps": [
+        "Step 1: Purchase a device from Target",
+        "Step 2: Intentionally cause the device to be defective or simulate a defect",
+        "Step 3: Attempt to return the device to Target within the return window",
+        "Step 4: Verify that Target accepts the return and processes it according to the return policy"
+      ],
+      "expected_result": "Target should accept the return and process it according to the return policy, without directing the customer to contact Total",
+      "actual_issue": "Target is not accepting returns for defective devices purchased from them, and instead directs customers to contact Total",
+      "environmental_dependencies": [
+        "Target store location",
+        "Device type",
+        "Return window timeframe"
+      ],
+      "edge_cases": [
+        "Device purchased near the end of the return window",
+        "Device has been used or shows signs of wear and tear",
+        "Customer has already contacted Total and been directed back to Target"
+      ],
+      "automation_feasibility": "Low",
+      "customer_impact": "Customer is left with a defective device and is forced to contact Total, leading to a poor customer experience and potential loss of trust in the brand",
+      "source_call_id": "TW_Total",
+      "source_channel": "Target",
+      "generated_at": "2025-08-31T19:57:20.223507"
+    },
+    {
+      "test_case_id": "TC_SMS_001",
+      "domain": "Customer Portal",
+      "service": "Plan Management",
+      "test_type": "Functional",
+      "priority": "High",
+      "severity": "High",
+      "issue_description": "Customer receives false data limit warnings after changing to an unlimited plan",
+      "test_scenario": "Test that the SMS alert system updates automatically when a customer changes to an unlimited plan",
+      "preconditions": [
+        "Customer has a limited data plan",
+        "Customer changes to an unlimited plan through the customer portal or mobile app"
+      ],
+      "test_steps": [
+        "Step 1: Create a test customer with a limited data plan",
+        "Step 2: Change the test customer's plan to an unlimited plan",
+        "Step 3: Verify that the SMS alert system is updated to reflect the new plan",
+        "Step 4: Simulate data usage to trigger a 90% data limit warning",
+        "Step 5: Verify that no SMS alert is sent to the customer"
+      ],
+      "expected_result": "The SMS alert system is updated automatically when the customer changes to an unlimited plan, and no false data limit warnings are sent",
+      "actual_issue": "The SMS alert system does not update automatically when the customer changes to an unlimited plan, resulting in false data limit warnings",
+      "environmental_dependencies": [
+        "Customer portal",
+        "Mobile app",
+        "SMS alert system"
+      ],
+      "edge_cases": [
+        "Test with different types of unlimited plans",
+        "Test with multiple plan changes in a short period"
+      ],
+      "automation_feasibility": "High",
+      "customer_impact": "Customers receive unnecessary and worrying alerts, potentially leading to frustration and churn",
+      "source_call_id": "TW_worrying",
+      "source_channel": "SMS/Bot/IVR",
+      "generated_at": "2025-08-31T19:57:21.676563"
+    },
+    {
+      "test_case_id": "TC_SMS_001",
+      "domain": "SMS",
+      "service": "Service Commands",
+      "test_type": "Functional",
+      "priority": "High",
+      "severity": "Medium",
+      "issue_description": "Invalid command errors when using SMS commands listed in the HELP menu",
+      "test_scenario": "Test that all SMS commands listed in the HELP menu are valid and functional",
+      "preconditions": [
+        "SMS service is enabled for the account",
+        "HELP menu is accessible via SMS"
+      ],
+      "test_steps": [
+        "Step 1: Send 'HELP' via SMS to retrieve the list of available commands",
+        "Step 2: Select each command from the list and send it via SMS",
+        "Step 3: Verify that each command responds with a valid result, rather than an 'invalid command' error"
+      ],
+      "expected_result": "All commands listed in the HELP menu respond with a valid result, without 'invalid command' errors",
+      "actual_issue": "Several commands listed in the HELP menu respond with 'invalid command' errors, causing customer frustration",
+      "environmental_dependencies": [
+        "SMS-enabled device",
+        "Network connectivity"
+      ],
+      "edge_cases": [
+        "Test with different types of SMS commands (e.g. account management, billing, etc.)",
+        "Test with different devices and networks to ensure consistency"
+      ],
+      "automation_feasibility": "Medium",
+      "customer_impact": "Customers experience frustration and wasted time when using invalid SMS commands, leading to unmet expectations",
+      "source_call_id": "TW_command",
+      "source_channel": "SMS/Bot/IVR",
+      "generated_at": "2025-08-31T19:57:23.029936"
+    }
+  ]
+}
