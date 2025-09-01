@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -492,6 +492,863 @@
                         <strong>Upload error:</strong> ${error.message}
                     </div>
                 `;
+            }
+        }
+    </script>
+</body>
+</html> --> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QA Test Case Generator</title>
+    <!-- Bootstrap for modal -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .dashboard {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .stats-panel, .generator-panel {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .stats-panel h2, .generator-panel h2 {
+            color: #4a5568;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .stat-item:last-child {
+            border-bottom: none;
+        }
+        
+        .stat-label {
+            font-weight: 600;
+            color: #2d3748;
+        }
+        
+        .stat-value {
+            background: #667eea;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-weight: 700;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #4a5568;
+        }
+        
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 16px;
+            background: white;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .generate-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        
+        .generate-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .generate-btn:disabled {
+            background: #a0a0a0;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .results-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-top: 30px;
+            display: none;
+        }
+        
+        .results-section.show {
+            display: block;
+        }
+        
+        .success-message {
+            background: #c6f6d5;
+            color: #2f855a;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #38a169;
+        }
+        
+        .error-message {
+            background: #fed7d7;
+            color: #c53030;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #e53e3e;
+        }
+        
+        .download-btn {
+            background: #38a169;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin: 10px 10px 10px 0;
+        }
+        
+        .download-btn:hover {
+            background: #2f855a;
+        }
+        
+        .preview-card {
+            background: #f7fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            position: relative;
+        }
+        
+        .preview-title {
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 10px;
+        }
+        
+        .preview-content {
+            color: #4a5568;
+            font-size: 14px;
+        }
+        
+        /* NEW: Conversational AI Styles */
+        .ai-assistant-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .ai-assistant-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(102,126,234,0.3);
+        }
+        
+        .conversation-indicator {
+            background: #28a745;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+            margin-left: 8px;
+        }
+        
+        .chat-bubble {
+            padding: 12px 16px;
+            margin: 10px 0;
+            border-radius: 18px;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+        
+        .user-bubble {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            margin-left: auto;
+            text-align: right;
+        }
+        
+        .ai-bubble {
+            background: #f1f3f4;
+            color: #333;
+            margin-right: auto;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .suggestion-btn {
+            background: white;
+            border: 1px solid #667eea;
+            color: #667eea;
+            border-radius: 20px;
+            padding: 8px 16px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 4px;
+            display: inline-block;
+        }
+        
+        .suggestion-btn:hover {
+            background: #667eea;
+            color: white;
+        }
+        
+        .chat-interface {
+            height: 400px;
+            overflow-y: auto;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 15px;
+            background: #fafafa;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+        }
+        
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .upload-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-top: 30px;
+        }
+        
+        .file-upload {
+            border: 2px dashed #e2e8f0;
+            border-radius: 8px;
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: border-color 0.3s ease;
+        }
+        
+        .file-upload:hover {
+            border-color: #667eea;
+        }
+        
+        .file-upload input[type="file"] {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>QA Test Case Generator</h1>
+            <p>Generate targeted test cases from customer support transcripts</p>
+        </div>
+        
+        <div class="dashboard">
+            <div class="stats-panel">
+                <h2>Available Data</h2>
+                <div class="stat-item">
+                    <span class="stat-label">Total Transcripts</span>
+                    <span class="stat-value">{{ stats.total_transcripts or 0 }}</span>
+                </div>
+                
+                <h3 style="margin: 20px 0 10px 0; color: #4a5568;">Channels</h3>
+                {% if stats.channels %}
+                    {% for channel, count in stats.channels.items() %}
+                    <div class="stat-item">
+                        <span class="stat-label">{{ channel }}</span>
+                        <span class="stat-value">{{ count }}</span>
+                    </div>
+                    {% endfor %}
+                {% endif %}
+                
+                <h3 style="margin: 20px 0 10px 0; color: #4a5568;">Severities</h3>
+                {% if stats.severities %}
+                    {% for severity, count in stats.severities.items() %}
+                    <div class="stat-item">
+                        <span class="stat-label">{{ severity }}</span>
+                        <span class="stat-value">{{ count }}</span>
+                    </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            
+            <div class="generator-panel">
+                <h2>Generate Test Cases</h2>
+                
+                <form id="generateForm">
+                    <div class="form-group">
+                        <label for="channel">Channel</label>
+                        <select id="channel" name="channel">
+                            <option value="all">All Channels</option>
+                            {% for channel in channels %}
+                            <option value="{{ channel }}">{{ channel }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="category">Issue Category</label>
+                        <select id="category" name="category">
+                            <option value="all">All Categories</option>
+                            {% for category in categories %}
+                            <option value="{{ category }}">{{ category }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="severity">Severity Level</label>
+                        <select id="severity" name="severity">
+                            <option value="all">All Severities</option>
+                            <option value="High">High</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Low">Low</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="brand">Brand</label>
+                        <select id="brand" name="brand">
+                            <option value="all">All Brands</option>
+                            <option value="Total Wireless">Total Wireless</option>
+                            <option value="TracFone">TracFone</option>
+                            <option value="Straight Talk">Straight Talk</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="generate-btn" id="generateBtn">
+                        Generate Test Cases
+                    </button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="results-section" id="resultsSection">
+            <h2>Generation Results</h2>
+            <div id="resultsContent"></div>
+        </div>
+        
+        <div class="upload-section">
+            <h2>Upload New Transcripts</h2>
+            <div class="file-upload" onclick="document.getElementById('fileInput').click()">
+                <input type="file" id="fileInput" accept=".pdf,.txt,.json" onchange="uploadFile()">
+                <p>Click to upload PDF, TXT, or JSON files</p>
+                <p style="color: #666; font-size: 14px;">Drag and drop or click to select</p>
+            </div>
+            <div id="uploadResults"></div>
+        </div>
+    </div>
+
+    <!-- NEW: Chat Modal for AI Conversations -->
+    <div class="modal fade" id="chatModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        AI Assistant - <span id="current-test-case-id">Test Case</span>
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Test Case Summary -->
+                    <div id="test-case-summary" class="mb-3 p-3" style="background: #f8f9fa; border-radius: 8px;">
+                        <!-- Test case details will be shown here -->
+                    </div>
+                    
+                    <!-- Suggested Questions -->
+                    <div class="mb-3">
+                        <h6>Quick Questions:</h6>
+                        <div id="suggested-questions">
+                            <small class="text-muted">Click "Load Suggestions" to see AI-generated questions</small>
+                        </div>
+                        <button class="btn btn-sm btn-outline-primary mt-2" onclick="loadChatSuggestions()">
+                            Load Suggestions
+                        </button>
+                    </div>
+                    
+                    <!-- Chat Interface -->
+                    <div id="chat-interface" class="chat-interface">
+                        <div class="text-center text-muted py-4">
+                            <div style="font-size: 48px;">💬</div>
+                            <p>Ask me anything about this test case!</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Question Input -->
+                    <div class="input-group mt-3">
+                        <input type="text" id="question-input" class="form-control" 
+                               placeholder="Ask a question about this test case..." 
+                               onkeypress="handleChatEnter(event)">
+                        <button class="btn btn-primary" onclick="askChatQuestion()">
+                            Ask
+                        </button>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-outline-secondary" onclick="exportChat()">
+                        Export Chat
+                    </button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Bootstrap JS for modal -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // NEW: Conversational AI Variables
+        let currentTestCaseId = '';
+        let currentTestCase = {};
+        let conversationHistory = {};
+        
+        // EXISTING: Form submission handler
+        document.getElementById('generateForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            const filters = {
+                channel: formData.get('channel'),
+                category: formData.get('category'),
+                severity: formData.get('severity'),
+                brand: formData.get('brand')
+            };
+            
+            // Show loading state
+            const generateBtn = document.getElementById('generateBtn');
+            const originalText = generateBtn.textContent;
+            generateBtn.disabled = true;
+            generateBtn.textContent = 'Generating...';
+            
+            // Show results section with loading
+            const resultsSection = document.getElementById('resultsSection');
+            const resultsContent = document.getElementById('resultsContent');
+            
+            resultsSection.classList.add('show');
+            resultsContent.innerHTML = `
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <p>Generating test cases... This may take a few minutes.</p>
+                </div>
+            `;
+            
+            try {
+                const response = await fetch('/generate', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(filters)
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    let previewHtml = '';
+                    if (result.preview && result.preview.length > 0) {
+                        previewHtml = '<h3>Preview (First 3 test cases):</h3>';
+                        result.preview.forEach((testCase, index) => {
+                            // ENHANCED: Add AI Assistant button to each preview card
+                            previewHtml += `
+                                <div class="preview-card">
+                                    <button class="ai-assistant-btn" onclick="openChat('${testCase.test_case_id || 'TC_' + index}', ${JSON.stringify(testCase).replace(/"/g, '&quot;')})">
+                                        AI Chat
+                                        <span class="conversation-indicator" id="conv-count-${testCase.test_case_id || 'TC_' + index}">0</span>
+                                    </button>
+                                    <div class="preview-title">${testCase.test_case_id || 'Test Case ' + (index + 1)}</div>
+                                    <div class="preview-content">
+                                        <strong>Domain:</strong> ${testCase.domain || 'N/A'}<br>
+                                        <strong>Priority:</strong> ${testCase.priority || 'N/A'}<br>
+                                        <strong>Issue:</strong> ${(testCase.issue_description || '').substring(0, 100)}...
+                                    </div>
+                                </div>
+                            `;
+                        });
+                    }
+                    
+                    resultsContent.innerHTML = `
+                        <div class="success-message">
+                            <strong>Success!</strong> Generated ${result.generated_count} test cases from ${result.filtered_count} filtered transcripts.
+                        </div>
+                        <a href="${result.download_url}" class="download-btn">Download Test Cases (JSON)</a>
+                        ${previewHtml}
+                    `;
+                } else {
+                    resultsContent.innerHTML = `
+                        <div class="error-message">
+                            <strong>Error:</strong> ${result.error}
+                        </div>
+                    `;
+                }
+                
+            } catch (error) {
+                resultsContent.innerHTML = `
+                    <div class="error-message">
+                        <strong>Network Error:</strong> ${error.message}
+                    </div>
+                `;
+            } finally {
+                generateBtn.disabled = false;
+                generateBtn.textContent = originalText;
+            }
+        });
+        
+        // EXISTING: Upload file handler
+        async function uploadFile() {
+            const fileInput = document.getElementById('fileInput');
+            const uploadResults = document.getElementById('uploadResults');
+            const file = fileInput.files[0];
+            
+            if (!file) return;
+            
+            const formData = new FormData();
+            formData.append('file', file);
+            
+            uploadResults.innerHTML = '<div class="loading"><div class="spinner"></div><p>Processing file...</p></div>';
+            
+            try {
+                const response = await fetch('/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    uploadResults.innerHTML = `
+                        <div class="success-message">
+                            <strong>Upload successful!</strong> ${result.message}
+                        </div>
+                    `;
+                    
+                    // Refresh page after 2 seconds to show new data
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 2000);
+                } else {
+                    uploadResults.innerHTML = `
+                        <div class="error-message">
+                            <strong>Upload failed:</strong> ${result.error}
+                        </div>
+                    `;
+                }
+                
+            } catch (error) {
+                uploadResults.innerHTML = `
+                    <div class="error-message">
+                        <strong>Upload error:</strong> ${error.message}
+                    </div>
+                `;
+            }
+        }
+        
+        // NEW: Conversational AI Functions
+        function openChat(testCaseId, testCaseData) {
+            currentTestCaseId = testCaseId;
+            currentTestCase = testCaseData;
+            
+            // Update modal title
+            document.getElementById('current-test-case-id').textContent = testCaseId;
+            
+            // Show test case summary
+            const summaryDiv = document.getElementById('test-case-summary');
+            summaryDiv.innerHTML = `
+                <strong>${testCaseData.domain || 'Unknown Domain'}</strong> | 
+                <span class="badge" style="background: #667eea; color: white;">${testCaseData.priority || 'Medium'}</span><br>
+                <small class="text-muted">${(testCaseData.issue_description || 'No description').substring(0, 150)}...</small>
+            `;
+            
+            // Load existing conversation if any
+            displayConversationHistory(testCaseId);
+            
+            // Show modal
+            new bootstrap.Modal(document.getElementById('chatModal')).show();
+        }
+        
+        function loadChatSuggestions() {
+            const suggestionsContainer = document.getElementById('suggested-questions');
+            suggestionsContainer.innerHTML = '<small class="text-muted">Loading suggestions...</small>';
+            
+            fetch(`/api/suggestions/${currentTestCaseId}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.suggestions && data.suggestions.length > 0) {
+                        displaySuggestions(data.suggestions);
+                    } else {
+                        // Fallback suggestions
+                        displaySuggestions([
+                            {category: 'automation', question: 'What specific elements should be automated in this test?'},
+                            {category: 'edge_cases', question: 'What edge cases should we consider?'},
+                            {category: 'clarification', question: 'How can we improve test coverage for this scenario?'}
+                        ]);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error loading suggestions:', error);
+                    displaySuggestions([
+                        {category: 'general', question: 'What are the key testing points for this issue?'},
+                        {category: 'automation', question: 'How should this test be automated?'},
+                        {category: 'validation', question: 'What validations are most important?'}
+                    ]);
+                });
+        }
+        
+        function displaySuggestions(suggestions) {
+            const container = document.getElementById('suggested-questions');
+            let html = '';
+            
+            suggestions.forEach(suggestion => {
+                html += `<span class="suggestion-btn" onclick="useSuggestion('${suggestion.question.replace(/'/g, "\\'")}')">
+                    ${suggestion.question}
+                </span>`;
+            });
+            
+            container.innerHTML = html;
+        }
+        
+        function useSuggestion(question) {
+            document.getElementById('question-input').value = question;
+            document.getElementById('question-input').focus();
+        }
+        
+        function askChatQuestion() {
+            const input = document.getElementById('question-input');
+            const question = input.value.trim();
+            
+            if (!question) {
+                alert('Please enter a question');
+                return;
+            }
+            
+            // Add user question to chat
+            addChatBubble(question, 'user');
+            input.value = '';
+            
+            // Add loading indicator
+            const chatInterface = document.getElementById('chat-interface');
+            const loadingDiv = document.createElement('div');
+            loadingDiv.className = 'ai-bubble loading-indicator';
+            loadingDiv.innerHTML = 'AI is thinking...';
+            chatInterface.appendChild(loadingDiv);
+            chatInterface.scrollTop = chatInterface.scrollHeight;
+            
+            // Make API call
+            fetch('/api/ask_question', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    test_case_id: currentTestCaseId,
+                    question: question
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Remove loading indicator
+                const loadingElement = document.querySelector('.loading-indicator');
+                if (loadingElement) loadingElement.remove();
+                
+                if (data.success) {
+                    // Add AI response
+                    addChatBubble(data.response.response, 'ai');
+                    
+                    // Update conversation history
+                    if (!conversationHistory[currentTestCaseId]) {
+                        conversationHistory[currentTestCaseId] = [];
+                    }
+                    conversationHistory[currentTestCaseId].push({
+                        question: question,
+                        response: data.response.response
+                    });
+                    
+                    // Update conversation count
+                    updateConversationCount(currentTestCaseId);
+                    
+                } else {
+                    addChatBubble('Sorry, I encountered an error: ' + (data.error || 'Unknown error'), 'ai');
+                }
+            })
+            .catch(error => {
+                // Remove loading indicator
+                const loadingElement = document.querySelector('.loading-indicator');
+                if (loadingElement) loadingElement.remove();
+                
+                addChatBubble('Sorry, there was an error processing your question.', 'ai');
+                console.error('Error:', error);
+            });
+        }
+        
+        function addChatBubble(message, sender) {
+            const chatInterface = document.getElementById('chat-interface');
+            
+            // Remove welcome message if it exists
+            const welcomeMsg = chatInterface.querySelector('.text-center');
+            if (welcomeMsg) welcomeMsg.remove();
+            
+            const bubbleClass = sender === 'user' ? 'user-bubble' : 'ai-bubble';
+            const bubble = document.createElement('div');
+            bubble.className = `chat-bubble ${bubbleClass}`;
+            bubble.textContent = message;
+            
+            chatInterface.appendChild(bubble);
+            chatInterface.scrollTop = chatInterface.scrollHeight;
+        }
+        
+        function handleChatEnter(event) {
+            if (event.key === 'Enter') {
+                askChatQuestion();
+            }
+        }
+        
+        function updateConversationCount(testCaseId) {
+            const countElement = document.getElementById(`conv-count-${testCaseId}`);
+            if (countElement && conversationHistory[testCaseId]) {
+                countElement.textContent = conversationHistory[testCaseId].length;
+                countElement.style.display = 'inline-flex';
+            }
+        }
+        
+        function displayConversationHistory(testCaseId) {
+            const chatInterface = document.getElementById('chat-interface');
+            
+            if (conversationHistory[testCaseId] && conversationHistory[testCaseId].length > 0) {
+                chatInterface.innerHTML = '';
+                const history = conversationHistory[testCaseId];
+                history.forEach(entry => {
+                    addChatBubble(entry.question, 'user');
+                    addChatBubble(entry.response, 'ai');
+                });
+            } else {
+                chatInterface.innerHTML = `
+                    <div class="text-center text-muted py-4">
+                        <div style="font-size: 48px;">💬</div>
+                        <p>Ask me anything about this test case!</p>
+                    </div>
+                `;
+            }
+        }
+        
+        function exportChat() {
+            if (conversationHistory[currentTestCaseId] && conversationHistory[currentTestCaseId].length > 0) {
+                window.open(`/export_conversations/${currentTestCaseId}`, '_blank');
+            } else {
+                alert('No conversation to export');
             }
         }
     </script>

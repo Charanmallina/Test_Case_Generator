@@ -1,0 +1,84 @@
+{
+  "test_case_id": "TC_WEB_001",
+  "domain": "Customer Portal",
+  "service": "Plan Management",
+  "test_type": "Functional",
+  "priority": "High",
+  "severity": "Medium",
+  "issue_description": "Customer is unable to change their plan immediately through the online portal and is forced to wait until the next billing cycle",
+  "test_scenario": "Test the online portal's plan change functionality to ensure it allows for immediate plan changes with prorated charges",
+  "preconditions": [
+    "Customer has an active account",
+    "Customer has used most of their data for the current cycle",
+    "Customer attempts to change their plan through the online portal"
+  ],
+  "test_steps": [
+    "Step 1: Log in to the customer portal with a test account",
+    "Step 2: Navigate to the plan change section",
+    "Step 3: Attempt to change the plan to a higher tier with more data",
+    "Step 4: Verify if the system allows for an immediate plan change with a prorated charge",
+    "Step 5: Verify if the system provides an alternative option to purchase a data add-on"
+  ],
+  "expected_result": "The system should allow the customer to change their plan immediately with a prorated charge or offer an alternative option to purchase a data add-on",
+  "actual_issue": "The system does not allow for immediate plan changes and forces the customer to wait until the next billing cycle",
+  "environmental_dependencies": [
+    "Browser type",
+    "Device",
+    "Network"
+  ],
+  "edge_cases": [
+    "Test with different plan combinations",
+    "Test with accounts that have multiple lines",
+    "Test with accounts that have pending payments or other restrictions"
+  ],
+  "automation_feasibility": "High",
+  "customer_impact": "Customer frustration, unnecessary support calls, and potential loss of business due to inability to meet customer needs in a timely manner",
+  "source_call_id": "TW_WEB_002",
+  "source_channel": "Web Portal",
+  "generated_at": "2025-08-31T20:48:58.943857",
+  "conversational_data": {
+    "conversation_history": [
+      {
+        "timestamp": "2025-09-01T09:25:13.768212",
+        "question": "What specific UI elements should be automated for this test case?",
+        "response": "To automate the test case TC_WEB_001, the following UI elements should be considered:\n\n1. **Login form**: Automate the login process using the test account credentials to ensure seamless execution.\n2. **Navigation menu**: Automate the navigation to the plan change section to verify that the user can access the required page.\n3. **Plan change form**: Automate the selection of the new plan and verification of the prorated charge calculation.\n4. **Confirmation dialog**: Automate the verification of the confirmation dialog that appears after submitting the plan change request.\n5. **Plan change summary**: Automate the verification of the plan change summary to ensure that the new plan details and prorated charges are displayed correctly.\n6. **Data add-on option**: Automate the verification of the alternative option to purchase a data add-on to ensure that it is displayed and functional.\n\nTechnical guidance for automation:\n\n* Use a tool like Selenium WebDriver to interact with the UI elements and verify their functionality.\n* Utilize a programming language like Java or Python to write the automation script.\n* Implement a wait mechanism to ensure that the automation script waits for the UI elements to load before interacting with them.\n* Use a data-driven approach to parameterize the test data, such as the test account credentials and plan details.\n\nAdditional test scenarios to consider:\n\n* Test the plan change functionality with different plan tiers and data add-ons to ensure that the prorated charge calculation is accurate.\n* Test the plan change functionality with different payment methods to ensure that the payment processing is handled correctly.\n* Test the error handling for scenarios like insufficient funds or invalid payment information.",
+        "question_type": "automation",
+        "confidence_score": 0.85,
+        "context_used": {
+          "has_transcript": false,
+          "conversation_length": 0
+        }
+      },
+      {
+        "timestamp": "2025-09-01T09:25:16.238530",
+        "question": "What additional edge cases should be considered?",
+        "response": "To further enhance the test case TC_WEB_001, consider the following additional edge cases:\n\n1. **Downgrade plan change**: Test if the system allows for an immediate plan change when downgrading to a lower tier with less data, and verify if the prorated charge is correctly calculated.\n2. **Plan change with no prorated charge**: Test if the system correctly handles plan changes when there are no prorated charges, such as when the change occurs on the billing cycle date.\n3. **Multiple plan changes in a single billing cycle**: Test if the system allows for multiple plan changes within the same billing cycle and verify if the prorated charges are correctly calculated.\n4. **Plan change with data add-on**: Test if the system correctly handles plan changes when a data add-on is purchased, and verify if the prorated charge is correctly calculated.\n5. **Error handling**: Test the system's error handling for scenarios such as:\n\t* Insufficient funds for the prorated charge\n\t* Invalid plan change request (e.g., changing to a non-existent plan)\n\t* System timeout or failure during the plan change process\n\nThese edge cases can help ensure that the online portal's plan change functionality is thoroughly tested and provides a seamless experience for customers.\n\nIn terms of automation, consider using tools like Selenium or Cypress to automate the UI interactions, and use APIs or database queries to verify the prorated charges and plan changes. Additionally, use a testing framework like TestNG or PyUnit to organize and run the test cases.",
+        "question_type": "edge_case",
+        "confidence_score": 0.85,
+        "context_used": {
+          "has_transcript": false,
+          "conversation_length": 1
+        }
+      },
+      {
+        "timestamp": "2025-09-01T09:25:18.375738",
+        "question": "How can we improve the test coverage for this scenario?",
+        "response": "To improve test coverage for the test case TC_WEB_001, consider the following enhancements:\n\n1. **Test Data Variations**: Include a range of test data to cover different scenarios, such as:\n\t* Different plan tiers (e.g., basic, premium, enterprise)\n\t* Various data add-on options\n\t* Multiple billing cycles (e.g., monthly, quarterly, annually)\n2. **Edge Cases**:\n\t* **Plan change with pending payments**: Test if the system allows for an immediate plan change when there are pending payments or overdue invoices.\n\t* **Concurrent plan changes**: Test if the system handles multiple plan change requests simultaneously, ensuring that the changes are processed correctly and in the correct order.\n\t* **Plan change with active promotions**: Test if the system applies promotions or discounts correctly when changing plans.\n3. **User Interface (UI) and User Experience (UX) Validation**:\n\t* Verify that the plan change section is easily accessible and navigable.\n\t* Test that the system provides clear and concise information about the plan change, including prorated charges and any applicable fees.\n4. **Automation**:\n\t* Consider using a data-driven approach to automate the test case, using a range of test data to cover different scenarios.\n\t* Use a tool like Selenium or Appium to automate the UI interactions, ensuring that the test case is executed consistently and efficiently.\n5. **Additional Test Scenarios**:\n\t* Test the plan change functionality for different user roles (e.g., admin, customer, guest).\n\t* Test the plan change functionality on different devices and browsers to ensure cross-browser and cross-device compatibility.\n\nBy incorporating these enhancements, you can improve the test coverage for the test case TC_WEB_001 and ensure that the plan change functionality is thoroughly tested, providing a better user experience for customers.",
+        "question_type": "edge_case",
+        "confidence_score": 0.85,
+        "context_used": {
+          "has_transcript": false,
+          "conversation_length": 2
+        }
+      }
+    ],
+    "qa_insights": [
+      "Automation guidance requested: What specific UI elements should be automated for ...",
+      "Edge case identified: What additional edge cases should be considered?...",
+      "Edge case identified: How can we improve the test coverage for this scen..."
+    ],
+    "additional_context": "Multiple edge cases identified; Multiple edge cases identified",
+    "conversation_summary": "Total questions: 3 (Automation: 1, Edge cases: 2)",
+    "last_updated": "2025-09-01T09:25:18.376849"
+  }
+}

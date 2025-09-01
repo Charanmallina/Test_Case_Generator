@@ -1,0 +1,384 @@
+{
+  "metadata": {
+    "total_test_cases": 8,
+    "generated_at": "2025-09-01T14:24:44.601765",
+    "success_rate": "8/8 (100.0%)",
+    "model_used": "llama-3.3-70b-versatile",
+    "source_file": "../data/processed/filtered_20250901_142426.json"
+  },
+  "test_cases": [
+    {
+      "test_case_id": "TC_WEB_001",
+      "domain": "Customer Portal",
+      "service": "Plan Management",
+      "test_type": "Functional",
+      "priority": "High",
+      "severity": "Medium",
+      "issue_description": "Customer is unable to upgrade their plan online due to restrictions on plan changes until the next billing cycle, despite having urgent data needs",
+      "test_scenario": "Test plan upgrade functionality when customer has high data usage and remaining days in their billing cycle",
+      "preconditions": [
+        "Customer has an active account with a current plan",
+        "Customer has high data usage and remaining days in their billing cycle"
+      ],
+      "test_steps": [
+        "Step 1: Login to the customer portal with a test account",
+        "Step 2: Navigate to the plan management section",
+        "Step 3: Attempt to upgrade the plan to a higher data limit",
+        "Step 4: Verify if the system allows the plan upgrade or displays an error message",
+        "Step 5: If an error message is displayed, verify if it provides options for prorated charges or other alternatives"
+      ],
+      "expected_result": "The system should allow the customer to upgrade their plan with a prorated charge or provide alternative options to address their urgent data needs",
+      "actual_issue": "The system restricts plan changes until the next billing cycle, causing customer inconvenience and leading to support calls",
+      "environmental_dependencies": [
+        "Browser type",
+        "Device",
+        "Network"
+      ],
+      "edge_cases": [
+        "Test with different plan combinations",
+        "Test with varying data usage and remaining days in the billing cycle"
+      ],
+      "automation_feasibility": "Medium",
+      "customer_impact": "High, as it leads to customer frustration, support calls, and potential loss of business due to unmet data needs",
+      "source_call_id": "TW_WEB_002",
+      "source_channel": "Web Portal",
+      "generated_at": "2025-09-01T14:24:29.389880",
+      "conversational_data": {
+        "conversation_history": [
+          {
+            "timestamp": "2025-09-01T14:25:15.094309",
+            "question": "what is the seviarity",
+            "response": "To address the QA team's question regarding the severity of the issue, let's break down the key points from the test case and customer transcript:\n\n1. **Issue Impact**: The customer is unable to upgrade their plan online due to restrictions on plan changes until the next billing cycle, which affects their urgent data needs.\n2. **Customer Experience**: The issue is causing inconvenience to customers who have high data usage and need to upgrade their plans immediately.\n3. **Business Impact**: This issue may lead to customer dissatisfaction, potential churn, and loss of revenue if customers are unable to upgrade their plans in a timely manner.\n\nBased on these points, the severity of the issue can be classified as **High**. This classification is due to the significant impact on customer experience and potential business revenue.\n\nTo further enhance the test case, consider the following suggestions:\n\n* **Additional Test Scenarios**:\n  * Test the plan upgrade functionality with different data usage scenarios (e.g., low, medium, high).\n  * Test the plan upgrade functionality with different billing cycle remaining days (e.g., 1 day, 15 days, 30 days).\n* **Edge Cases**:\n  * What happens if the customer's current plan is already at the highest data limit?\n  * What happens if the customer's account is suspended or inactive?\n* **Error Message Verification**:\n  * Verify that the error message provides clear instructions on the next steps for the customer.\n  * Verify that the error message provides options for prorated charges or other alternatives, as mentioned in Step 5 of the test case.\n\nBy considering these additional test scenarios and edge cases, the QA team can ensure that the plan upgrade functionality is thoroughly tested and provides a seamless experience for customers.",
+            "question_type": "general",
+            "confidence_score": 0.85,
+            "context_used": {
+              "has_transcript": true,
+              "conversation_length": 0
+            }
+          },
+          {
+            "timestamp": "2025-09-01T14:25:55.749652",
+            "question": "just give me its seviarity no need of explaination",
+            "response": "The severity of the issue is **High**.",
+            "question_type": "clarification",
+            "confidence_score": 0.85,
+            "context_used": {
+              "has_transcript": true,
+              "conversation_length": 1
+            }
+          }
+        ],
+        "qa_insights": [],
+        "additional_context": "",
+        "conversation_summary": "Total questions: 2 (Automation: 0, Edge cases: 0)",
+        "created_at": "2025-09-01T14:24:44.617970",
+        "last_updated": "2025-09-01T14:25:55.752321"
+      }
+    },
+    {
+      "test_case_id": "TC_WEB_001",
+      "domain": "Web Portal",
+      "service": "Device Activation",
+      "test_type": "Functional",
+      "priority": "High",
+      "severity": "High",
+      "issue_description": "Port request gets stuck due to mismatch in name format between Verizon account and web portal form",
+      "test_scenario": "Test that the web portal form for device activation/port request handles names with middle initials correctly",
+      "preconditions": [
+        "User has a Verizon account with a name that includes a middle initial",
+        "User has a new device to activate on the web portal"
+      ],
+      "test_steps": [
+        "Step 1: Enter user's Verizon account information, including name with middle initial, on the web portal form",
+        "Step 2: Submit the port request",
+        "Step 3: Verify that the port request is processed successfully without getting stuck"
+      ],
+      "expected_result": "The port request is processed successfully, and the device is activated without delay",
+      "actual_issue": "The port request gets stuck due to the name format mismatch, causing service delays and customer dissatisfaction",
+      "environmental_dependencies": [
+        "Browser type",
+        "Device",
+        "Network"
+      ],
+      "edge_cases": [
+        "Test with different name formats, such as names with suffixes (e.g., Jr., Sr.) or names with multiple middle initials",
+        "Test with non-English characters in the name"
+      ],
+      "automation_feasibility": "Medium",
+      "customer_impact": "Service delays, customer dissatisfaction, and potential loss of business due to poor customer experience",
+      "source_call_id": "TW_WEB_003",
+      "source_channel": "Web Portal",
+      "generated_at": "2025-09-01T14:24:31.410538",
+      "conversational_data": {
+        "conversation_history": [],
+        "qa_insights": [],
+        "additional_context": "",
+        "conversation_summary": "No conversations yet",
+        "created_at": "2025-09-01T14:24:44.617991"
+      }
+    },
+    {
+      "test_case_id": "TC_WEB_001",
+      "domain": "Web Portal",
+      "service": "Billing and Charging",
+      "test_type": "Functional",
+      "priority": "High",
+      "severity": "High",
+      "issue_description": "Incorrect international roaming charges when near the border",
+      "test_scenario": "Test that the system correctly identifies and handles roaming charges when a user is near the border but does not cross into another country",
+      "preconditions": [
+        "User has an active account with international roaming enabled",
+        "User is near the border but does not cross into another country"
+      ],
+      "test_steps": [
+        "Step 1: Set up a test user account with international roaming enabled",
+        "Step 2: Simulate the user being near the border (e.g. San Diego near the Mexican border) but not crossing into another country",
+        "Step 3: Verify that the user's phone connects to a domestic tower instead of a foreign tower",
+        "Step 4: Check the user's account for any international roaming charges",
+        "Step 5: Verify that the system correctly identifies and handles the roaming charges"
+      ],
+      "expected_result": "The system should not charge the user for international roaming when they are near the border but do not cross into another country",
+      "actual_issue": "The system is incorrectly charging users for international roaming when they are near the border but do not cross into another country",
+      "environmental_dependencies": [
+        "Network coverage near the border",
+        "Phone settings and signal strength"
+      ],
+      "edge_cases": [
+        "Test with different phone models and operating systems",
+        "Test with different network providers and coverage areas",
+        "Test with users who are near the border but occasionally cross into another country"
+      ],
+      "automation_feasibility": "Medium",
+      "customer_impact": "Incorrect charges and potential financial loss for customers who are incorrectly charged for international roaming",
+      "source_call_id": "TW_WEB_004",
+      "source_channel": "Web Portal",
+      "generated_at": "2025-09-01T14:24:33.612162",
+      "conversational_data": {
+        "conversation_history": [],
+        "qa_insights": [],
+        "additional_context": "",
+        "conversation_summary": "No conversations yet",
+        "created_at": "2025-09-01T14:24:44.617996"
+      }
+    },
+    {
+      "test_case_id": "TC_WEB_001",
+      "domain": "Customer Portal",
+      "service": "Device Purchase",
+      "test_type": "Functional",
+      "priority": "High",
+      "severity": "High",
+      "issue_description": "Pricing discrepancy between product page and checkout page for device purchase",
+      "test_scenario": "Verify that pricing information is consistent and clear for devices with promotional pricing based on new line activation",
+      "preconditions": [
+        "User is logged in to the web portal",
+        "User has an existing line",
+        "User navigates to the product page for the Samsung Galaxy A54"
+      ],
+      "test_steps": [
+        "Step 1: Verify the price displayed on the product page for the Samsung Galaxy A54",
+        "Step 2: Add the device to cart and proceed to checkout",
+        "Step 3: Verify the price displayed on the checkout page",
+        "Step 4: Check for any promotional pricing information or disclaimers on both the product page and checkout page"
+      ],
+      "expected_result": "The price displayed on the product page and checkout page should be consistent, and any promotional pricing information (e.g. 'price with new line activation') should be clearly displayed on the product page",
+      "actual_issue": "Pricing discrepancy between product page and checkout page due to unclear promotional pricing information",
+      "environmental_dependencies": [
+        "Browser type",
+        "Device"
+      ],
+      "edge_cases": [
+        "Test with different devices and pricing plans",
+        "Test with new line activation vs. existing line"
+      ],
+      "automation_feasibility": "Medium",
+      "customer_impact": "Customer experiences frustration and mistrust due to unexpected price change at checkout",
+      "source_call_id": "TW_WEB_005",
+      "source_channel": "Web Portal",
+      "generated_at": "2025-09-01T14:24:35.714469",
+      "conversational_data": {
+        "conversation_history": [],
+        "qa_insights": [],
+        "additional_context": "",
+        "conversation_summary": "No conversations yet",
+        "created_at": "2025-09-01T14:24:44.617998"
+      }
+    },
+    {
+      "test_case_id": "TC_WEB_001",
+      "domain": "Customer Portal",
+      "service": "Plan Management",
+      "test_type": "Functional",
+      "priority": "High",
+      "severity": "Medium",
+      "issue_description": "Plan change buttons are non-responsive for users with international calling and mobile hotspot add-ons",
+      "test_scenario": "Test plan change functionality for users with specific add-ons",
+      "preconditions": [
+        "User has an account with international calling and mobile hotspot add-ons",
+        "User is logged in to the web portal",
+        "User is using a supported browser (e.g. Chrome)"
+      ],
+      "test_steps": [
+        "Step 1: Log in to the web portal as a user with international calling and mobile hotspot add-ons",
+        "Step 2: Navigate to the plan management section",
+        "Step 3: Click on the plan options button",
+        "Step 4: Verify that the plan change buttons are responsive and functional"
+      ],
+      "expected_result": "The plan change buttons should be clickable and allow the user to change their plan",
+      "actual_issue": "The plan change buttons are non-responsive and do not allow the user to change their plan",
+      "environmental_dependencies": [
+        "Browser type (Chrome)",
+        "Device (laptop)",
+        "Network (stable internet connection)"
+      ],
+      "edge_cases": [
+        "Test with different add-on combinations",
+        "Test with different browser types",
+        "Test with different devices (e.g. mobile, tablet)"
+      ],
+      "automation_feasibility": "High",
+      "customer_impact": "Customers are unable to change their plans, leading to frustration and potential churn",
+      "source_call_id": "TW_WEB_006",
+      "source_channel": "Web Portal",
+      "generated_at": "2025-09-01T14:24:37.921817",
+      "conversational_data": {
+        "conversation_history": [],
+        "qa_insights": [],
+        "additional_context": "",
+        "conversation_summary": "No conversations yet",
+        "created_at": "2025-09-01T14:24:44.618001"
+      }
+    },
+    {
+      "test_case_id": "TC_WEB_001",
+      "domain": "Web Portal",
+      "service": "Promotional Offers",
+      "test_type": "Functional",
+      "priority": "High",
+      "severity": "High",
+      "issue_description": "Promotional code not valid for existing customers despite being sent via email",
+      "test_scenario": "Test the application of a promotional code sent to existing customers to ensure it is correctly validated and applied",
+      "preconditions": [
+        "Existing customer account",
+        "Promotional code sent via email",
+        "Code is for new customers only"
+      ],
+      "test_steps": [
+        "Step 1: Log in to the web portal as an existing customer",
+        "Step 2: Attempt to apply a promotional code sent via email",
+        "Step 3: Verify the error message received when applying the code",
+        "Step 4: Check the email containing the promotional code for any restrictions or conditions",
+        "Step 5: Verify the customer's account type (new or existing) and compare with the code's restrictions"
+      ],
+      "expected_result": "The system should clearly indicate that the promotional code is only valid for new customers and prevent its application to existing customer accounts",
+      "actual_issue": "The system allows existing customers to attempt to apply the code, resulting in a 'code not valid' error without clear explanation",
+      "environmental_dependencies": [
+        "Browser type",
+        "Device"
+      ],
+      "edge_cases": [
+        "Test with different types of promotional codes (e.g. percentage off, free shipping)",
+        "Test with different customer account types (e.g. individual, business)"
+      ],
+      "automation_feasibility": "High",
+      "customer_impact": "Frustration and wasted time due to unclear or misleading promotional code information, potentially leading to customer churn",
+      "source_call_id": "TW_until",
+      "source_channel": "Web Portal",
+      "generated_at": "2025-09-01T14:24:40.275934",
+      "conversational_data": {
+        "conversation_history": [],
+        "qa_insights": [],
+        "additional_context": "",
+        "conversation_summary": "No conversations yet",
+        "created_at": "2025-09-01T14:24:44.618003"
+      }
+    },
+    {
+      "test_case_id": "TC_WEBPORTAL_001",
+      "domain": "Mobile App",
+      "service": "Device Upgrade",
+      "test_type": "Functional",
+      "priority": "Critical",
+      "severity": "High",
+      "issue_description": "Mobile app crashes when attempting to upgrade device on Android devices with more than 100 apps installed",
+      "test_scenario": "Test device upgrade functionality on Android devices with varying numbers of installed apps",
+      "preconditions": [
+        "Android device with more than 100 apps installed",
+        "Mobile app installed and logged in",
+        "Device upgrade option available"
+      ],
+      "test_steps": [
+        "Step 1: Launch mobile app on Android device",
+        "Step 2: Navigate to device upgrade section",
+        "Step 3: Select a new device to upgrade to",
+        "Step 4: Verify app response and complete upgrade process"
+      ],
+      "expected_result": "Device upgrade process completes successfully without app crash",
+      "actual_issue": "App crashes when selecting a new device to upgrade to on Android devices with more than 100 apps installed",
+      "environmental_dependencies": [
+        "Android device (e.g. Google Pixel 6)",
+        "Mobile app version with known bug",
+        "More than 100 apps installed on device"
+      ],
+      "edge_cases": [
+        "Test with different Android device models",
+        "Test with varying numbers of installed apps (e.g. 50, 100, 200)",
+        "Test with different device upgrade options (e.g. changing plan, adding features)"
+      ],
+      "automation_feasibility": "Medium",
+      "customer_impact": "Core functionality impacted, forcing customers to use alternative methods (e.g. web portal, customer support) to upgrade their devices",
+      "source_call_id": "TW_phone",
+      "source_channel": "Web Portal",
+      "generated_at": "2025-09-01T14:24:42.531097",
+      "conversational_data": {
+        "conversation_history": [],
+        "qa_insights": [],
+        "additional_context": "",
+        "conversation_summary": "No conversations yet",
+        "created_at": "2025-09-01T14:24:44.618005"
+      }
+    },
+    {
+      "test_case_id": "TC_WEB_001",
+      "domain": "Mobile App",
+      "service": "Auto-Pay Management",
+      "test_type": "Functional",
+      "priority": "High",
+      "severity": "Medium",
+      "issue_description": "Customer unable to disable auto-pay through mobile app when enrolled through website",
+      "test_scenario": "Test auto-pay disable functionality through mobile app for accounts enrolled through website",
+      "preconditions": [
+        "Account enrolled in auto-pay through website",
+        "Mobile app installed and logged in with same account credentials"
+      ],
+      "test_steps": [
+        "Step 1: Launch mobile app and navigate to 'Account' section",
+        "Step 2: Select 'Payment' option",
+        "Step 3: Verify presence of 'Disable Auto-Pay' option",
+        "Step 4: If option is present, attempt to disable auto-pay and verify success message"
+      ],
+      "expected_result": "Customer is able to disable auto-pay through mobile app",
+      "actual_issue": "Mobile app lacks feature parity with website, preventing customers from disabling auto-pay",
+      "environmental_dependencies": [
+        "Mobile device with app installed",
+        "Website access for initial auto-pay enrollment"
+      ],
+      "edge_cases": [
+        "Test with different payment methods",
+        "Test with multiple accounts enrolled in auto-pay"
+      ],
+      "automation_feasibility": "Medium",
+      "customer_impact": "Inconvenience and frustration due to inability to manage account settings through preferred channel",
+      "source_call_id": "TW_WEB_010",
+      "source_channel": "Web Portal",
+      "generated_at": "2025-09-01T14:24:44.596927",
+      "conversational_data": {
+        "conversation_history": [],
+        "qa_insights": [],
+        "additional_context": "",
+        "conversation_summary": "No conversations yet",
+        "created_at": "2025-09-01T14:24:44.618007"
+      }
+    }
+  ]
+}
